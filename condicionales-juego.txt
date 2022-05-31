@@ -1,0 +1,30 @@
+/*if(message.content.includes("1")){
+      message.channel.send("Te ganaste un boleto para ir a besarnos por 5 horas");
+    }
+    else if(message.content.includes("2")){
+      message.channel.send("Te ganaste un boleto para una nalgueada xd");
+    }
+    else if(message.content.includes("3")){
+      message.channel.send("Te ganaste un boleto para darnos un buen cogidon mimaor");
+    }
+    else if(message.content.includes("4")){
+      message.channel.send("Te ganaste un boleto para tener una salida bien piola<3");
+    }
+    else if(message.content.includes("5")){
+      message.channel.send("Te ganaste un boleto para abrazarnos como ositos :3");
+    }
+    else if(message.content.includes("6")){
+      message.channel.send("Te ganaste un boleto para tener una relacion de 80 años");
+    }
+    else if(message.content.includes("7")){
+      message.channel.send("Te ganaste un boleto para decirte lo mucho que me gustas y me encantas miamor");
+    }
+    else if(message.content.includes("8")){
+      message.channel.send("Te ganaste un boleto para ser novios");
+    }
+    else if(message.content.includes("9")){
+      message.channel.send("Te ganaste un boleto para mostrarme tus chichis");
+    }
+    else if(message.content.includes("10")){
+      message.channel.send("Te ganaste un boleto para que me cantes una cancion, oh si fri fayer");
+    }*/
