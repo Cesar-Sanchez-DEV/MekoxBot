@@ -9,13 +9,13 @@ module.exports = {
 
 async execute (mekox, message, args){
     // ID:giorgio = 857610509632012368;
-    if(["857610509632012368"].includes(message.author.id)){
-      const embed = new MessageEmbed()
-      .setTitle("Lo siento, tu estas estás en la lista negra, safa safa nomas")
-      .setColor("RED")
-      return message.channel.send({ embeds: [embed] })
-      }
-    if (!["750847741483286549","957720942639972383"].includes(message.author.id)){
+    // if(["857610509632012368"].includes(message.author.id)){
+    //   const embed = new MessageEmbed()
+    //   .setTitle("Lo siento, tu estas estás en la lista negra, safa safa nomas")
+    //   .setColor("RED")
+    //   return message.channel.send({ embeds: [embed] })
+    // }
+    if (!["750847741483286549"].includes(message.author.id)){
     const embed = new MessageEmbed()
     .setTitle("WTF y este random?, no tienes permiso para usar este comando pampu. `|` :pouting_cat:")
     .setColor("RED")

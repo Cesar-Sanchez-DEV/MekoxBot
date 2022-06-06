@@ -14,7 +14,7 @@ module.exports = {
             if (comando) {
                 let embed = new Discord.MessageEmbed()
                     .setTitle(`Comando \`${comando.name}\``)
-                    .setFooter({ text: `© desarollado por Rasec_moreno#1316 | 2022`, iconURL: `https://images-ext-2.discordapp.net/external/G2O3wNQkWm957e5Qv3xUpceIQozUug5Z_dfyP9aIKYQ/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/282942681980862474/c2136834f15c6f8633c19c72feeb2427.webp` })
+                    .setFooter({ text: `© desarollado por <@750847741483286549> | 2022`, iconURL: `https://images-ext-2.discordapp.net/external/G2O3wNQkWm957e5Qv3xUpceIQozUug5Z_dfyP9aIKYQ/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/282942681980862474/c2136834f15c6f8633c19c72feeb2427.webp` })
                     .setColor("#ccb494");
                 //condicionales
                 if (comando.desc) embed.addField(`✍ Descripción`, `\`\`\`${comando.desc}\`\`\``);
@@ -42,10 +42,10 @@ module.exports = {
             .setTitle(`Ayuda de __${mekox.user.tag}__`)
             .setColor("#ccb494")
             .setDescription(`Bot Multifuncional en Desarollo por \`Rasec_moreno#1316\``)
-            .addField(`❓ **__¿Quién soy?__**`, `👋 Hola **${message.author.username}**, mi nombre es **__${mekox.user.username}__**\n🤯 Soy un BOT MULTIFUNCIONAL Incluyendo:\n> **ADMINISTRACIÓN\n> MODERACIÓN\n> MÚSICA**\n*y mucho más!*`)
-            .addField(`📈 **__ESTADÍSTICAS__**`, `⚙ **${mekox.commands.size} Comandos**\n📁 en **${mekox.guilds.cache.size} Servidores**\n📶 **\`${mekox.ws.ping}ms\` Ping**\n👤 Desarollado por **[dewstouh#1088](https://discord.gg/MBPsvcphGf)**`)
+            .addField(`❓ __¿Quién soy?__`, `👋 Hola **${message.author}**, mi nombre es **__${mekox.user.username}__**\n🤯 Soy un BOT MULTIFUNCIONAL Incluyendo:\n> **ADMINISTRACIÓN\n> MODERACIÓN\n> MÚSICA**\n*y mucho más!*`)
+            .addField(`📈 **__ESTADÍSTICAS__**`, `⚙ **${mekox.commands.size} Comandos**\n📁 en **${mekox.guilds.cache.size} Servidores**\n📶 **\`${mekox.ws.ping}ms\` Ping**\n👤 Desarollado por **<@750847741483286549>(https://discord.gg/MBPsvcphGf)**`)
             .setThumbnail(message.guild.iconURL({ dynamic: true }))
-            .setFooter({ text: `Página 1 / ${categorias.length+1}\n© desarollado por Jhon Saavedra#8268 | 2022`, iconURL: `https://images-ext-2.discordapp.net/external/G2O3wNQkWm957e5Qv3xUpceIQozUug5Z_dfyP9aIKYQ/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/282942681980862474/c2136834f15c6f8633c19c72feeb2427.webp` })
+            .setFooter({ text: `Página 1 / ${categorias.length+1}\n© desarollado por <@750847741483286549> | 2022`, iconURL: `https://images-ext-2.discordapp.net/external/G2O3wNQkWm957e5Qv3xUpceIQozUug5Z_dfyP9aIKYQ/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/282942681980862474/c2136834f15c6f8633c19c72feeb2427.webp` })
             let embeds_pages = [ayuda_embed];
 
             //por cada categoria, creamos un embed y lo empujamos en embeds_pages

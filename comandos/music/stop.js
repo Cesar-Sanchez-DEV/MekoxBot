@@ -3,7 +3,7 @@ const mekox = require('discord.js');
 
 module.exports = {
     name: "stop",
-    alias: ["leave"],
+    alias: ["parar"],
     execute(mekox, message, args) {
         //comprobaciones previas
         const queue = mekox.distube.getQueue(message);

@@ -9,7 +9,7 @@ module.exports = {
   //"https://cdn.discordapp.com/emojis/894976138584158249.gif?size=80&quality=lossless"
 
 execute (mekox, message, args){
-   var links = ['https://tenor.com/view/dog-toy-twerk-gif-11120890','https://cdn.discordapp.com/emojis/894976138584158249.gif?size=80&quality=lossless']
+   var links = ['https://tenor.com/view/dog-toy-twerk-gif-11120890','https://cdn.discordapp.com/emojis/894976138584158249.gif?size=80&quality=lossless','https://cdn.discordapp.com/emojis/969806905969094696.gif','https://cdn.discordapp.com/emojis/968356752666034186.gif','https://cdn.discordapp.com/emojis/947448290729930782.gif','https://cdn.discordapp.com/emojis/947598745019744277.gif','https://cdn.discordapp.com/emojis/618247325319561229.gif']
 
    const linkfinal = links[Math.floor(Math.random() * links.length)]
  

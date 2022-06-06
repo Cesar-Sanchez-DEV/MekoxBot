@@ -100,7 +100,7 @@ mekox.on("messageCreate", (message)=> {
     const embed = new Discord.MessageEmbed()
     .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
     .setTitle('❌`|`Comando no encontrado')
-    .setDescription(`El comando \`${command}\` no está definido, consulta con @Rasec_moreno#1316 si quieres agregar un comando :)`)
+    .setDescription(`El comando \`${command}\` no está definido, consulta con <@750847741483286549> si quieres agregar un comando :)`+"<:emoji_45:856232972914131005>")
     .setThumbnail("https://cdn.discordapp.com/attachments/887737260554977311/979805792351961088/Gatito-mekox-llorar.png")
     .setTimestamp()
     .setColor("#ccb494")

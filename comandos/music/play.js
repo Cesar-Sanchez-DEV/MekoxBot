@@ -21,15 +21,39 @@ module.exports = {
 
         // if(regex) return message.reply({ embeds: [embed] })
 
-        if(!cancion) return message.reply(`❌ \`Tienes que especificar el nombre de una canción!\``);
-        if(!message.member.voice?.channel) return message.reply(`❌ \`Tienes que estar en un canal de voz para ejecutar este comando!\``);
-        if(message.guild.me.voice?.channel && message.member.voice?.channel.id != message.guild.me.voice?.channel.id) return message.reply(`❌ \`Tienes que estar en el mismo canal de voz __QUE YO__ para ejecutar este comando!\``);
+        if(!cancion){
+            const embed = new Discord.MessageEmbed()
+            .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
+            .setDescription(`\`Tienes que especificar el nombre de una canción!❌ \``)
+            .setThumbnail("https://cdn.discordapp.com/attachments/887737260554977311/979805792351961088/Gatito-mekox-llorar.png")
+            .setTimestamp()
+            .setColor("#ccb494")
+        return message.reply({ embeds:[embed] })
+        }
+        if(!message.member.voice?.channel){
+            const embed = new Discord.MessageEmbed()
+            .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
+            .setDescription(`\`Tienes que estar en un canal de voz para ejecutar este comando!❌\``)
+            .setThumbnail("https://cdn.discordapp.com/attachments/887737260554977311/979805792351961088/Gatito-mekox-llorar.png")
+            .setTimestamp()
+            .setColor("#ccb494")
+        return message.reply({ embeds:[embed] });
+        }
+        if(message.guild.me.voice?.channel && message.member.voice?.channel.id != message.guild.me.voice?.channel.id){ 
+            const embed = new Discord.MessageEmbed()
+            .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
+            .setDescription(`\`Tienes que estar en el mismo canal de voz __QUE YO__ para ejecutar este comando!❌\``)
+            .setThumbnail("https://cdn.discordapp.com/attachments/887737260554977311/979805792351961088/Gatito-mekox-llorar.png")
+            .setTimestamp()
+            .setColor("#ccb494")
+        return message.reply({ embeds:[embed] });
+        }
         mekox.distube.play(message.member.voice?.channel, cancion, {
             member: message.member,
             textChannel: message.channel,
             message
         });
-        message.reply(`🔎 Buscando \`${cancion}\``);
+        // message.reply(`🔎 Buscando \`${cancion}\``);
         
     }
 }
