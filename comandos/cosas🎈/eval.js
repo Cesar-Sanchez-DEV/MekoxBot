@@ -1,5 +1,6 @@
 const { Message, Client, MessageActionRow, MessageButton } = require("discord.js");
 const randomExt = require("random-ext");
+const Discord = require('discord.js')
 const { inspect } = require("util");
 const { MessageEmbed, MessageAttachment } = require('discord.js');
 
@@ -29,8 +30,16 @@ async execute (mekox, message, args){
     }
     let cosa = args.join(" ");
 
-    if (!cosa)
-        return message.channel.send(`Ingresa un código a evaluar.`);
+    if (!cosa){
+    const embedErrorCod = new Discord.MessageEmbed()
+    .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
+    .setTitle('❌`|`Error al evaluar código')
+    .setDescription(`Debes ingresar un código a evaluar.`+"<:emoji_45:856232972914131005>")
+    .setThumbnail("https://cdn.discordapp.com/attachments/887737260554977311/979805792351961088/Gatito-mekox-llorar.png")
+    .setTimestamp()
+    .setColor("#ccb494")
+    message.reply({ embeds:[embedErrorCod] })
+    }
 
     if(args.join(" ").startsWith("-exec")){
       let run = args.slice(1).join(" ");
