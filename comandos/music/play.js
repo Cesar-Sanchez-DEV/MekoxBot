@@ -24,7 +24,7 @@ module.exports = {
         if(!cancion){
             const embed = new Discord.MessageEmbed()
             .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
-            .setDescription(`Tienes que especificar el nombre de una canción \`\`\`js\nm-e <songName> \n\`\`\``)
+            .setDescription(`Tienes que especificar el nombre de una canción \`\`\`js\nm-p <songName> \n\`\`\``)
             .setTimestamp()
             .setColor("#ccb494")
         return message.reply({ embeds:[embed] })
