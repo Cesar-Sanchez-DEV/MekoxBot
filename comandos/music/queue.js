@@ -28,7 +28,7 @@ module.exports = {
             //Creamos un embed por cada 10 canciones
             let embed = new Discord.MessageEmbed()
                 .setAuthor(`Mekox | Music`, mekox.user.avatarURL())
-                .setTitle(`🎶 Cola de ${message.guild.name} - \`[${queue.songs.length} ${queue.songs.length > 1 ? "Canciones" : "Canción"}${queue.songs.formattedDuration}]\``)
+                .setTitle(`🎶 Cola de ${message.guild.name} - \`[${queue.songs.length} ${queue.songs.length > 1 ? "Canciones" : "Canción"}]\``)
                 .setColor("#ccb494")
                 .setDescription(desc)
                 .setTimestamp()

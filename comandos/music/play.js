@@ -24,7 +24,7 @@ module.exports = {
         if(!cancion){
             const embed = new Discord.MessageEmbed()
             .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
-            .setDescription(`\`Tienes que especificar el nombre de una canción!❌ \``)
+            .setDescription(`\`Tienes que especificar el nombre de una canción!❌ \` \`\`\`js\n m-e <songName> \n\`\`\``)
             .setThumbnail("https://cdn.discordapp.com/attachments/887737260554977311/979805792351961088/Gatito-mekox-llorar.png")
             .setTimestamp()
             .setColor("#ccb494")
@@ -42,7 +42,7 @@ module.exports = {
         if(message.guild.me.voice?.channel && message.member.voice?.channel.id != message.guild.me.voice?.channel.id){ 
             const embed = new Discord.MessageEmbed()
             .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
-            .setDescription(`\`Tienes que estar en el mismo canal de voz __QUE YO__ para ejecutar este comando!❌\``)
+            .setDescription(`\`Tienes que estar en el mismo canal de voz que yo para ejecutar este comando!❌\``)
             .setThumbnail("https://cdn.discordapp.com/attachments/887737260554977311/979805792351961088/Gatito-mekox-llorar.png")
             .setTimestamp()
             .setColor("#ccb494")
