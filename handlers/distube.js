@@ -42,7 +42,6 @@ module.exports = (mekox, Discord) => {
             .setThumbnail(playsong.thumbnail)
             .setColor("#ccb494")
             .setFooter({text: `Añadida por ${playsong.user.tag}`, iconURL: playsong.user.displayAvatarURL({dynamic: true})})
-            .setTimestamp()
             ]
         })
     })

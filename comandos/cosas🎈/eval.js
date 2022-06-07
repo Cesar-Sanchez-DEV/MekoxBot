@@ -18,13 +18,13 @@ async execute (mekox, message, args){
     if (!["750847741483286549"].includes(message.author.id)){
     const embed = new MessageEmbed()
     .setTitle("WTF y este random?, no tienes permiso para usar este comando pampu. `|` :pouting_cat:")
-    .setColor("RED")
+    .setColor("#ccb494")
     return message.channel.send({ embeds: [embed] })
 }
     if(["957720942639972383"].includes(message.author.id)){
       const embed = new MessageEmbed()
       .setTitle("WTF eres un bot wn ;-;")
-      .setColor("RED")
+      .setColor("#ccb494")
       return message.reply({ embeds: [embed] })
     }
     let cosa = args.join(" ");
@@ -72,12 +72,17 @@ async execute (mekox, message, args){
       code = await eval(cosa);
       code = inspect(code, { depth: 0 });
       const type = typeof code;
+      
+      const msgEmbed = new MessageEmbed()
+      .setTitle(`Tipo ${type}`)
+      .setDescription(`\`${code}\``)
+      .setColor("#ccb494")
 
       const msg = await message.channel.send({
         content: `Tipo ${type} \n\n\`\`\`js\n${code}\n\`\`\``,
-        components: [row]
+        components: [row],
+        // embeds:[msgEmbed]
       });
-
       const collector = msg.createMessageComponentCollector({ componentType: "BUTTON"});
 
       collector.on("collect", async (i) => {
