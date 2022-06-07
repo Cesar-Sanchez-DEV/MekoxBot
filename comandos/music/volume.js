@@ -9,27 +9,28 @@ module.exports = {
     execute (mekox, message, args){
         const serverQueue = mekox.distube.getQueue(message)
 
-        if(!message.member.voice.channel) {
-        const error = new Discord.MessageEmbed()
-        .setAuthor("Mekox | Error ", mekox.user.avatarURL())
-        .setDescription(`Debes estar en un canal de voz para usar esto`)
-        .setColor("#ccb494")
-        return message.channel.send({ embeds : [error] })
+        if(!message.member.voice?.channel){
+            const embed = new Discord.MessageEmbed()
+            .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
+            .setDescription(`Tienes que estar en un \`canal de voz\` para ejecutar este comando`)
+            .setTimestamp()
+            .setColor("#ccb494")
+        return message.reply({ embeds:[embed] });
         }
-
-        if(message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id){
-        const error = new Discord.MessageEmbed()
-        .setAuthor("Mekox | Error ", mekox.user.avatarURL())
-        .setDescription(`Unete al mismo canal de voz que yo`)
-        .setColor("#ccb494")
-
-        return message.channel.send({ embeds : [error] })
+        
+        else if(message.guild.me.voice?.channel && message.member.voice?.channel.id != message.guild.me.voice?.channel.id){ 
+            const embed = new Discord.MessageEmbed()
+            .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
+            .setDescription(`Unete al mismo \`canal de voz que yo\` para ejecutar este comando`)
+            .setTimestamp()
+            .setColor("#ccb494")
+        return message.reply({ embeds:[embed] });
         }
 
         if(!serverQueue) {
         const error = new Discord.MessageEmbed()
         .setAuthor("Mekox | Error ", mekox.user.avatarURL())
-        .setDescription(`No hay canciones reproduciendose ahora`)
+        .setDescription(`No hay canciones reproduciendose ahora, agrega una canción con: \`\`\`js\nm-p <songName>\n\`\`\``)
         .setColor("#ccb494")
         return message.channel.send({ embeds : [error] })
         }

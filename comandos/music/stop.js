@@ -7,9 +7,31 @@ module.exports = {
     execute(mekox, message, args) {
         //comprobaciones previas
         const queue = mekox.distube.getQueue(message);
-        if(!queue) return message.reply(`❌ \`No hay ninguna canción reproduciéndose!\``);
-        if(!message.member.voice?.channel) return message.reply(`❌ \`Tienes que estar en un canal de voz para ejecutar este comando!\``);
-        if(message.guild.me.voice?.channel && message.member.voice?.channel.id != message.guild.me.voice?.channel.id) return message.reply(`❌ **Tienes que estar en el mismo canal de voz __QUE YO__ para ejecutar este comando!**`);
+        if(!queue) {
+            const error = new Discord.MessageEmbed()
+            .setAuthor("Mekox | Error ", mekox.user.avatarURL())
+            .setDescription(`No hay canciones reproduciendose ahora, agrega una canción con: \`\`\`js\nm-p <songName>\n\`\`\``)
+            .setColor("#ccb494")
+            return message.channel.send({ embeds : [error] })
+        }
+        
+        if(!message.member.voice?.channel){
+            const embed = new Discord.MessageEmbed()
+            .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
+            .setDescription(`Tienes que estar en un \`canal de voz\` para ejecutar este comando`)
+            .setTimestamp()
+            .setColor("#ccb494")
+        return message.reply({ embeds:[embed] });
+        }
+        
+        else if(message.guild.me.voice?.channel && message.member.voice?.channel.id != message.guild.me.voice?.channel.id){ 
+            const embed = new Discord.MessageEmbed()
+            .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
+            .setDescription(`Unete al mismo \`canal de voz que yo\` para ejecutar este comando`)
+            .setTimestamp()
+            .setColor("#ccb494")
+        return message.reply({ embeds:[embed] });
+        }
         mekox.distube.stop(message);
         
     }

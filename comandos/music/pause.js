@@ -6,13 +6,41 @@ module.exports = {
     alias: ["pausa","pausar"],
 
     execute (mekox, message, args,playsong){
-        if(!message.member.voice?.channel) return message.reply(`❌ \`Tienes que estar en un canal de voz para ejecutar este comando!\``);
-        if(message.guild.me.voice?.channel && message.member.voice?.channel.id != message.guild.me.voice?.channel.id) return message.reply(`❌ \`Tienes que estar en el mismo canal de voz __QUE YO__ para ejecutar este comando!\``);
+        if(!message.member.voice?.channel){
+            const embed = new Discord.MessageEmbed()
+            .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
+            .setDescription(`Tienes que estar en un \`canal de voz\` para ejecutar este comando`)
+            .setTimestamp()
+            .setColor("#ccb494")
+        return message.reply({ embeds:[embed] });
+        }
+        
+        else if(message.guild.me.voice?.channel && message.member.voice?.channel.id != message.guild.me.voice?.channel.id){ 
+            const embed = new Discord.MessageEmbed()
+            .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
+            .setDescription(`Unete al mismo \`canal de voz que yo\` para ejecutar este comando`)
+            .setTimestamp()
+            .setColor("#ccb494")
+        return message.reply({ embeds:[embed] });
+        }
 
         const serverQueue = mekox.distube.getQueue(message);
 
-        if(!serverQueue) return message.reply("No hay canciones reproduciendose ahora pampu.");
-        if(serverQueue.paused) return message.reply("La musica ya está pausada.")
+        if(!serverQueue) {
+            const error = new Discord.MessageEmbed()
+            .setAuthor("Mekox | Error ", mekox.user.avatarURL())
+            .setDescription(`No hay canciones reproduciendose ahora, agrega una canción con: \`\`\`js\nm-p <songName>\n\`\`\``)
+            .setColor("#ccb494")
+            return message.channel.send({ embeds : [error] })
+        }
+
+        if(serverQueue.paused){
+            const error = new Discord.MessageEmbed()
+            .setAuthor("Mekox | Error ", mekox.user.avatarURL())
+            .setDescription(`La musica ya está pausada.`)
+            .setColor("#ccb494")
+            return message.channel.send({ embeds : [error] })
+        }
         mekox.distube.pause(message);
 
         const embed = new Discord.MessageEmbed()

@@ -8,9 +8,31 @@ module.exports = {
     async execute(mekox, message, args) {
         //comprobaciones previas
         const queue = mekox.distube.getQueue(message);
-        if (!queue) return message.reply(`❌ \`No hay ninguna canción reproduciéndose!\``);
-        if (!message.member.voice?.channel) return message.reply(`❌ \`Tienes que estar en un canal de voz para ejecutar este comando!\``);
-        if (message.guild.me.voice?.channel && message.member.voice?.channel.id != message.guild.me.voice?.channel.id) return message.reply(`❌ \`Tienes que estar en el mismo canal de voz __QUE YO__ para ejecutar este comando!\``);
+        if(!queue) {
+            const error = new Discord.MessageEmbed()
+            .setAuthor("Mekox | Error ", mekox.user.avatarURL())
+            .setDescription(`No hay canciones reproduciendose ahora, agrega una canción con: \`\`\`js\nm-p <songName>\n\`\`\``)
+            .setColor("#ccb494")
+            return message.channel.send({ embeds : [error] })
+        }
+
+        if(!message.member.voice?.channel){
+            const error = new Discord.MessageEmbed()
+            .setAuthor("Mekox | Error ", mekox.user.avatarURL())
+            .setDescription(`Tienes que estar en un canal de voz para ejecutar este comando`)
+            .setTimestamp()
+            .setColor("#ccb494")
+            return message.channel.send({ embeds : [error] })
+        }
+
+        if(message.guild.me.voice?.channel && message.member.voice?.channel.id != message.guild.me.voice?.channel.id){
+            const error = new Discord.MessageEmbed()
+            .setAuthor("Mekox | Error ", mekox.user.avatarURL())
+            .setDescription(`Unete al mismo canal de voz que yo para ejecutar este comando`)
+            .setTimestamp()
+            .setColor("#ccb494")
+            return message.channel.send({ embeds : [error] })
+        }
 
         let listaqueue = []; //creamos un array vacío donde se introducirán todas las canciones
         var maximascanciones = 10; //Estas serán las máximas canciones mostradas por página.

@@ -21,29 +21,31 @@ module.exports = {
 
         // if(regex) return message.reply({ embeds: [embed] })
 
-        if(!cancion){
+        if(!message.member.voice?.channel){
+            const embed = new Discord.MessageEmbed()
+            .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
+            .setDescription(`Tienes que estar en un \`canal de voz\` para ejecutar este comando`)
+            .setTimestamp()
+            .setColor("#ccb494")
+        return message.reply({ embeds:[embed] });
+        }
+        
+        else if(message.guild.me.voice?.channel && message.member.voice?.channel.id != message.guild.me.voice?.channel.id){ 
+            const embed = new Discord.MessageEmbed()
+            .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
+            .setDescription(`Unete al mismo \`canal de voz que yo\` para ejecutar este comando`)
+            .setTimestamp()
+            .setColor("#ccb494")
+        return message.reply({ embeds:[embed] });
+        }
+
+        else if(!cancion){
             const embed = new Discord.MessageEmbed()
             .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
             .setDescription(`Tienes que especificar el nombre de una canción \`\`\`js\nm-p <songName> \n\`\`\``)
             .setTimestamp()
             .setColor("#ccb494")
         return message.reply({ embeds:[embed] })
-        }
-        if(!message.member.voice?.channel){
-            const embed = new Discord.MessageEmbed()
-            .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
-            .setDescription(`\`Tienes que estar en un canal de voz para ejecutar este comando\``)
-            .setTimestamp()
-            .setColor("#ccb494")
-        return message.reply({ embeds:[embed] });
-        }
-        if(message.guild.me.voice?.channel && message.member.voice?.channel.id != message.guild.me.voice?.channel.id){ 
-            const embed = new Discord.MessageEmbed()
-            .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
-            .setDescription(`\`Tienes que estar en el mismo canal de voz que yo para ejecutar este comando\``)
-            .setTimestamp()
-            .setColor("#ccb494")
-        return message.reply({ embeds:[embed] });
         }
         mekox.distube.play(message.member.voice?.channel, cancion, {
             member: message.member,

@@ -8,13 +8,36 @@ module.exports = {
     execute(mekox, message, args){
         //comprobaciones previas
         const queue = mekox.distube.getQueue(message);
-        if(!queue) return message.reply(`❌ \`No hay ninguna canción reproduciéndose!\``);
-        if(!message.member.voice?.channel) return message.reply(`❌ \`Tienes que estar en un canal de voz para ejecutar este comando!\``);
-        if(message.guild.me.voice?.channel && message.member.voice?.channel.id != message.guild.me.voice?.channel.id) return message.reply(`❌ \`Tienes que estar en el mismo canal de voz __QUE YO__ para ejecutar este comando!\``);
+
+        if(!message.member.voice?.channel){
+            const embed = new Discord.MessageEmbed()
+            .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
+            .setDescription(`Tienes que estar en un \`canal de voz\` para ejecutar este comando`)
+            .setTimestamp()
+            .setColor("#ccb494")
+        return message.reply({ embeds:[embed] });
+        }
+        
+        else if(message.guild.me.voice?.channel && message.member.voice?.channel.id != message.guild.me.voice?.channel.id){ 
+            const embed = new Discord.MessageEmbed()
+            .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
+            .setDescription(`Unete al mismo \`canal de voz que yo\` para ejecutar este comando`)
+            .setTimestamp()
+            .setColor("#ccb494")
+        return message.reply({ embeds:[embed] });
+        }
+        else if(!queue) {
+            const error = new Discord.MessageEmbed()
+            .setAuthor("Mekox | Error ", mekox.user.avatarURL())
+            .setDescription(`No hay canciones reproduciendose ahora, agrega una canción con: \`\`\`js\nm-p <songName>\n\`\`\``)
+            .setColor("#ccb494")
+            return message.channel.send({ embeds : [error] })
+        }
+
         if(!queue.songs[1]){
         const error = new Discord.MessageEmbed()
         .setAuthor("Mekox | Error ", mekox.user.avatarURL())
-        .setDescription(`Error al skipear la cancion, no quedan más canciones, agrega una canción con \`\`\`js\nm-p <songName>\n\`\`\``)
+        .setDescription(`Error al skipear la cancion, no quedan más canciones, agrega una canción con: \`\`\`js\nm-p <songName>\n\`\`\``)
         .setThumbnail("https://cdn.discordapp.com/attachments/887737260554977311/983576007640494120/unknown.png")
         .setColor("#ccb494")
         return message.channel.send({ embeds : [error] });
