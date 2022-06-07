@@ -38,7 +38,8 @@ async execute (mekox, message, args){
     .setThumbnail("https://cdn.discordapp.com/attachments/887737260554977311/979805792351961088/Gatito-mekox-llorar.png")
     .setTimestamp()
     .setColor("#ccb494")
-    message.reply({ embeds:[embedErrorCod] })
+    message.channel.send({ embeds:[embedErrorCod] })
+    return;
     }
 
     if(args.join(" ").startsWith("-exec")){
