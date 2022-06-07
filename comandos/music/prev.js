@@ -41,18 +41,16 @@ module.exports = {
             .setDescription(`No hay canciones reproduciendose ahora, agrega una canción con: \`\`\`js\nm-p <songName>\n\`\`\``)
             .setColor("#ccb494")
             return message.channel.send({ embeds : [error] })
-        }else{
-            message.reply(`\`Reproduciendo la cancion anteior⏪\``)
         }
+        if(serverQueue.previousSongs?.length===0){
+            const error = new Discord.MessageEmbed()
+            .setAuthor("Mekox | Error ", mekox.user.avatarURL())
+            .setDescription(`Error al retroceder de canción, no exiten canciones previas.`)
+            .setColor("#ccb494")
+            return message.channel.send({ embeds : [error] });
+            }else{
+                message.reply(`\`Reproduciendo la cancion anteior⏪\``)
+            }
         mekox.distube.previous(message);
-
-
-        // const embed = new Discord.MessageEmbed()
-        // .setTitle("Musica pausada⏸")
-        // .setDescription(`Pausada por ${message.author}`)
-        //.setDescription(`${playsong.name}${playsong.url}`)
-        // .setColor("RED")
-        //message.reply(`⏸\`La música se ha pausado pampu\``)
-        // message.channel.send({ embeds: [embed] })
     }
 }

@@ -10,8 +10,7 @@ module.exports = {
   let emoji = args[0];
   if(!emoji) {
    const aemoji = new Discord.MessageEmbed()
-   .setTitle("Debes colocar un emoji!")
-   .setDescription(`Hey <${message.author}> Lee lo qué te dije!`)
+   .setDescription(`Hey ${message.author} Debes ingresar un emoji.`)
    .setColor("#ccb494")
    return message.reply({embeds: [aemoji]})
   }
@@ -35,4 +34,4 @@ module.exports = {
 
  }
 
-} 
+}
