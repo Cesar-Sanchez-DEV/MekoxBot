@@ -14,7 +14,7 @@ module.exports = {
         if(!queue.songs[1]){
         const error = new Discord.MessageEmbed()
         .setAuthor("Mekox | Error ", mekox.user.avatarURL())
-        .setDescription(`Error al skipear la cancion, no quedan más canciones, agrega una canción con \`\`\`js\nm-e <songName>\n\`\`\``)
+        .setDescription(`Error al skipear la cancion, no quedan más canciones, agrega una canción con \`\`\`js\nm-p <songName>\n\`\`\``)
         .setThumbnail("https://cdn.discordapp.com/attachments/887737260554977311/983576007640494120/unknown.png")
         .setColor("#ccb494")
         return message.channel.send({ embeds : [error] });
