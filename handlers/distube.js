@@ -74,7 +74,7 @@ module.exports = (mekox, Discord) => {
         queue.textChannel.send({
             embeds: [new Discord.MessageEmbed()
             .setAuthor(`Mekox | Music`, mekox.user.avatarURL())
-            .setDescription(`Alamos, bot desconectado. `, "> "+ `Para seguir con las canciones debes agregar una usando: \`\`\`js\nm-p <songName>\n\`\`\``)
+            .setDescription(`Alamos, bot desconectado, para seguir con las canciones debes agregar una usando: \`\`\`js\nm-p <songName>\n\`\`\``)
             .setColor("#ccb494")
             .setTimestamp()
             ]
