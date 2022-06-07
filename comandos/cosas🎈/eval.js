@@ -16,10 +16,13 @@ async execute (mekox, message, args){
     //   .setColor("RED")
     //   return message.channel.send({ embeds: [embed] })
     // }
-    if (!["750847741483286549"].includes(message.author.id)){
+    if (!["750847741483286549","751983555890118789"].includes(message.author.id)){
     const embed = new MessageEmbed()
+    .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
     .setTitle("WTF y este random?, no tienes permiso para usar este comando pampu. `|` :pouting_cat:")
+    .setThumbnail("https://cdn.discordapp.com/attachments/887737260554977311/983576351447580712/unknown.png")
     .setColor("#ccb494")
+    .setTimestamp()
     return message.channel.send({ embeds: [embed] })
 }
     if(["957720942639972383"].includes(message.author.id)){
@@ -38,7 +41,7 @@ async execute (mekox, message, args){
     .setThumbnail("https://cdn.discordapp.com/attachments/887737260554977311/979805792351961088/Gatito-mekox-llorar.png")
     .setTimestamp()
     .setColor("#ccb494")
-    message.channel.send({ embeds:[embedErrorCod] })
+    message.reply({ embeds:[embedErrorCod] })
     return;
     }
 
@@ -84,14 +87,17 @@ async execute (mekox, message, args){
       const type = typeof code;
       
       const msgEmbed = new MessageEmbed()
+      .setAuthor(`Mekox | Eval`, mekox.user.avatarURL())
       .setTitle(`Tipo ${type}`)
-      .setDescription(`\`${code}\``)
+      .setDescription(`\`\`\`js\n${code}\n\`\`\``)
+      .setThumbnail("https://cdn.discordapp.com/attachments/887737260554977311/983576007640494120/unknown.png")
       .setColor("#ccb494")
+      .setTimestamp()
 
       const msg = await message.channel.send({
-        content: `Tipo ${type} \n\n\`\`\`js\n${code}\n\`\`\``,
+        // content: `Tipo ${type} \n\n\`\`\`js\n${code}\n\`\`\``,
         components: [row],
-        // embeds:[msgEmbed]
+        embeds:[msgEmbed]
       });
       const collector = msg.createMessageComponentCollector({ componentType: "BUTTON"});
 
