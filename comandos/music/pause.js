@@ -24,6 +24,15 @@ module.exports = {
         return message.reply({ embeds:[embed] });
         }
 
+        else if(!message.guild.me.voice?.channel){
+            const embed = new Discord.MessageEmbed()
+            .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
+            .setDescription(`No estoy en un \`canal de voz\` pampu, invócame con: \`\`\`js\nm-p <songName>\n\`\`\``)
+            .setTimestamp()
+            .setColor("#ccb494")
+        return message.reply({ embeds:[embed] });
+        }
+
         const serverQueue = mekox.distube.getQueue(message);
 
         if(!serverQueue) {
@@ -40,16 +49,17 @@ module.exports = {
             .setDescription(`La musica ya está pausada.`)
             .setColor("#ccb494")
             return message.channel.send({ embeds : [error] })
+        }else{
+            const embed = new Discord.MessageEmbed()
+            .setAuthor(`Mekox | Music`, mekox.user.avatarURL())
+            .setTitle("Musica pausada⏸")
+            .setDescription(`Pausada por ${message.author}`)
+            .setColor("#ccb494")
+            .setTimestamp()
+            message.channel.send({ embeds: [embed] })
         }
         mekox.distube.pause(message);
 
-        const embed = new Discord.MessageEmbed()
-        .setAuthor(`Mekox | Music`, mekox.user.avatarURL())
-        .setTitle("Musica pausada⏸")
-        .setDescription(`Pausada por ${message.author}`)
-        .setColor("#ccb494")
-        .setTimestamp()
-        message.channel.send({ embeds: [embed] })
 
 
         

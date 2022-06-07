@@ -26,6 +26,7 @@ module.exports = {
             .setColor("#ccb494")
         return message.reply({ embeds:[embed] });
         }
+        
         else if(!message.guild.me.voice?.channel){
             const embed = new Discord.MessageEmbed()
             .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
@@ -34,6 +35,7 @@ module.exports = {
             .setColor("#ccb494")
         return message.reply({ embeds:[embed] });
         }
+
         else if(!queue) {
             const error = new Discord.MessageEmbed()
             .setAuthor("Mekox | Error ", mekox.user.avatarURL())
