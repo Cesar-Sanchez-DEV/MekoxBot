@@ -2,7 +2,6 @@ const Discord = require("discord.js");
 const mekox = new Discord.Client({ intents: 32767 });
 const fs = require('fs');
 let { readdirSync } = require('fs');
-require('colors')
 
 let nick = "mekoxBot"
 
