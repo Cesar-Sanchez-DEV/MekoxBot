@@ -16,7 +16,7 @@ execute (mekox, message, args){
     //.setDescription("1.Escoge un numero del 1 al 10.")
     .setColor("#ccb494")
     op= args.join(" ")
-    if (op="1"){
+    if (op=="1"){
       message.channel.send("Eres una zorra")
     }
   

@@ -4,7 +4,7 @@ const fs = require('fs');
 let { readdirSync } = require('fs');
 require('colors')
 
-let nick = "mekoxBot"
+let nick = "mekoxBOT"
 
 console.log(`╔═════════════════════════════════════════════════════╗`.red)
 console.log(`║ `.red + `            Conectando como ${nick}`.red + " ".repeat(`Conectando como `.length) + "║".red)
@@ -44,7 +44,7 @@ mekox.on("ready", () => {
         type: 'PLAYING'
       }],
       [{
-        name: `unos cuantos servidores jijiji`,
+        name: `${mekox.guilds.cache.size} servidores jijiji`,
         type: 'WATCHING'
       }],
       [{
@@ -89,7 +89,7 @@ mekox.on("messageCreate", (message)=> {
   }*/
   if (cmd) {
     try {
-      cmd.execute(mekox, message, args)
+      cmd.execute(mekox, message, args, prefix)
     } catch (e) {
       return;
     }

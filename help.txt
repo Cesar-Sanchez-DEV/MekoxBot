@@ -4,9 +4,10 @@ module.exports = {
     name: "help",
     alias: ["h", "ayuda", "bothelp"],
     desc: "Sirve para ver la información del Bot",
-    execute: async (mekox, message, args, prefix) => {
+    execute: async (mekox, message, args) => {
         //definimos las categorias del bot leyendo la ruta ./comandos
         const categorias = readdirSync('./comandos');
+        const prefix = "m-";
         
         if (args[0]) {
             const comando = mekox.commands.get(args[0].toLowerCase()) || mekox.commands.find(c => c.alias && c.alias.includes(args[0].toLowerCase()));
@@ -34,7 +35,7 @@ module.exports = {
             } else {
                 return message.reply(`❌ **No se ha encontrado el comando que has especificado!**\nUsa \`${prefix}help\` para ver los comandos y categorías!`)
             }
-        } else {
+        }else{
             var paginaActual = 0;
 
             //definimos el embed principal
@@ -158,7 +159,7 @@ module.exports = {
                         .setColor("#ccb494")
                         .setThumbnail(message.guild.iconURL({ dynamic: true }))
                         .setDescription(comandos_de_categoria.length >= 1 ? `>>> *${comandos_de_categoria.map(comando => `\`${comando.replace(/.js/, "")}\``).join(" - ")}*` : `>>> *Todavía no hay comandos en esta categoría...*`)
-                        .setFooter({text: `© desarollado por Jhon Saavedra#8268| 2022`, iconURL: `https://images-ext-2.discordapp.net/external/G2O3wNQkWm957e5Qv3xUpceIQozUug5Z_dfyP9aIKYQ/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/282942681980862474/c2136834f15c6f8633c19c72feeb2427.webp` })
+                        .setFooter({text: `© desarollado por Rasec_moreno#1316| 2022`, iconURL: `https://images-ext-2.discordapp.net/external/G2O3wNQkWm957e5Qv3xUpceIQozUug5Z_dfyP9aIKYQ/%3Fsize%3D4096/https/cdn.discordapp.com/avatars/282942681980862474/c2136834f15c6f8633c19c72feeb2427.webp` })
 
                         embeds.push(embed)
                     }

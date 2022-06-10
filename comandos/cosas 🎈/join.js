@@ -26,7 +26,7 @@ module.exports = {
             .setColor("#ccb494")
             return message.channel.send({ embeds: [thing] });
         }
-        if(!message.member.voice?.channel){
+        if(!memberVoice){
             let thing = new Discord.MessageEmbed()
             .setDescription(`Debes estar en un canal de voz`)
             .setColor("#ccb494")

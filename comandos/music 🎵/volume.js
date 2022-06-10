@@ -131,5 +131,6 @@ module.exports = {
         .setColor("#ccb494")
 
         message.channel.send({ embeds: [embed] })
+
     }
 }

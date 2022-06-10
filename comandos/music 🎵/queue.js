@@ -60,12 +60,12 @@ module.exports = {
             //Creamos un embed por cada 10 canciones
             let embed = new Discord.MessageEmbed()
                 .setAuthor(`Mekox | Music`, mekox.user.avatarURL())
-                .setTitle(`🎶 Cola de ${message.guild.name} - \`[${queue.songs.length} ${queue.songs.length > 1 ? "Canciones" : "Canción"}]\``)
+                .setTitle(`🎶 Cola de ${message.guild.name} - \`[${queue.songs.length} ${queue.songs.length > 1 ? "Canciones" : "Canción"}]\`${queue.songs.formattedDuration}`)
                 .setColor("#ccb494")
                 .setDescription(desc)
                 .setTimestamp()
             //Si la cantidad de canciones a mostrar es mayor a una, entonces especificamos en el embed, que canción se está reproduciendo en ese instante.
-            if (queue.songs.length > 1) embed.addField(`💿 Canción Actual`, `**[\`${queue.songs[0].name}\`](${queue.songs[0].url})**\`(${queue.songs[0].formattedDuration})\``)
+            if (queue.songs.length > 1) embed.addField("<a:musicaa:917160425425109032> "+`Canción Actual`, `**[\`${queue.songs[0].name}\`](${queue.songs[0].url})**\`(${queue.songs[0].formattedDuration})\``)
             await embeds.push(embed)
         }
         return paginacion();

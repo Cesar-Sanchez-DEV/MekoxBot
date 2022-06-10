@@ -35,7 +35,7 @@ module.exports = (mekox, Discord) => {
         queue.textChannel.send({
             embeds: [new Discord.MessageEmbed()
             .setAuthor(`Mekox | Music `, mekox.user.avatarURL())
-            .setTitle("Reproduciendo💽")
+            .setTitle(`Reproduciendo`+"<a:DiscordCD:926985065030885457>")
             .setDescription(` > [${playsong.name}](${playsong.url}) 
             **Duracion**
             \`${playsong.formattedDuration}\``)
@@ -50,10 +50,9 @@ module.exports = (mekox, Discord) => {
         queue.textChannel.send({
             embeds: [new Discord.MessageEmbed()
             .setAuthor(`Mekox | Music `, mekox.user.avatarURL())
-            .setTitle("✅ Añadido a la lista:")
-            .setDescription(`[${playsong.name}](${playsong.url}) 
-            \`${playsong.formattedDuration}\``)
-            .setThumbnail(playsong.thumbnail)
+            // .setTitle("")
+            .setDescription(`Añadido a la lista📌[${playsong.name}](${playsong.url}) \`${playsong.formattedDuration}\``)
+            // .setThumbnail(playsong.thumbnail)
             .setColor("#ccb494")
             .setFooter({text: `Añadida por ${playsong.user.tag}`, iconURL: playsong.user.displayAvatarURL({dynamic: true})})
             .setTimestamp()
@@ -80,16 +79,6 @@ module.exports = (mekox, Discord) => {
             ]
         })
     });
-    // mekox.distube.on("searchNoResult", (queue, query) => {
-    //     queue.textChannel.send({
-    //         embeds: [new Discord.MessageEmbed()
-    //         .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
-    //         .setDescription(`Url inválido ${query}`)
-    //         .setColor("#ccb494")
-    //         .setTimestamp()
-    //         ]
-    //     })
-    // });
     mekox.distube.on("searchNoResult",(message, query) => {
         const embed = new Discord.MessageEmbed()
         .setAuthor(`Mekox | Error`, mekox.user.avatarURL())

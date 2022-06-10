@@ -36,10 +36,8 @@ async execute (mekox, message, args){
     if (!cosa){
     const embedErrorCod = new Discord.MessageEmbed()
     .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
-    .setTitle('❌`|`Error al evaluar código')
-    .setDescription(`Debes ingresar un código a evaluar.`+"<:emoji_45:856232972914131005>")
+    .setDescription(`Debes ingresar un código a evaluar.`)
     .setThumbnail("https://cdn.discordapp.com/attachments/887737260554977311/979805792351961088/Gatito-mekox-llorar.png")
-    .setTimestamp()
     .setColor("#ccb494")
     message.reply({ embeds:[embedErrorCod] })
     return;
@@ -92,7 +90,6 @@ async execute (mekox, message, args){
       .setDescription(`\`\`\`js\n${code}\n\`\`\``)
       .setThumbnail("https://cdn.discordapp.com/attachments/887737260554977311/983576007640494120/unknown.png")
       .setColor("#ccb494")
-      .setTimestamp()
 
       const msg = await message.channel.send({
         // content: `Tipo ${type} \n\n\`\`\`js\n${code}\n\`\`\``,
