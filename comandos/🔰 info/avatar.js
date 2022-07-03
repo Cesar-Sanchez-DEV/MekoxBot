@@ -11,7 +11,8 @@ async execute (mekox, message, args){
     (args[0] ? await mekox.users.fetch(args[0]).catch(() => {}) : undefined) || message.author;
     const embed = new Discord.MessageEmbed()
     .setAuthor(`Mekox | Avatar`, mekox.user.avatarURL())
-    .setTitle(`Avatar de: ${usuario.username}`)
+    .setDescription(`${usuario.username} ****[|](https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley)**** Avatar`)
+   //  .setTitle(`Avatar de: ${usuario.username}`)
     .setImage(usuario.displayAvatarURL({ dynamic:true, size: 1024}))
     .setColor("#ccb494")
     .setTimestamp();

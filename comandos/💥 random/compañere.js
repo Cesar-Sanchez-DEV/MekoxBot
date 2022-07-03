@@ -1,8 +1,9 @@
 const Discord = require('discord.js');
 
 module.exports = {
-    name: "mitzy",
-    alias: ["mecse"],
+    name: "compañere",
+    alias: ["mecse","mitzy"],
+    desc: "El bot envia una compañere",
 
     execute (mekox, message, args){
         message.delete("mitzy","mecse")

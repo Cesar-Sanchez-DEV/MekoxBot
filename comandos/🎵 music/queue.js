@@ -3,9 +3,9 @@ const mekox = require('discord.js');
 
 module.exports = {
     name: "queue",
-    alias: ["q", "cola"],
+    alias: ["q", "cola","lista","list"],
     desc: "Sirve para ver la lista de canciones",
-    async execute(mekox, message, args) {
+    async execute(mekox, message, args, prefix) {
         //comprobaciones previas
         const queue = mekox.distube.getQueue(message);
 
@@ -60,7 +60,7 @@ module.exports = {
             //Creamos un embed por cada 10 canciones
             let embed = new Discord.MessageEmbed()
                 .setAuthor(`Mekox | Music`, mekox.user.avatarURL())
-                .setTitle(`🎶 Cola de ${message.guild.name} - \`[${queue.songs.length} ${queue.songs.length > 1 ? "Canciones" : "Canción"}]\`${queue.songs.formattedDuration}`)
+                .setTitle(`🎶 Cola de ${message.guild.name} - \`[${queue.songs.length} ${queue.songs.length > 1 ? "Canciones" : "Canción"}] : ${queue.formattedDuration}\``)
                 .setColor("#ccb494")
                 .setDescription(desc)
                 .setTimestamp()
@@ -85,7 +85,7 @@ module.exports = {
                 components: [new Discord.MessageActionRow().addComponents([boton_atras, boton_inicio, boton_avanzar])]
             });
             //Creamos un collector y filtramos que la persona que haga click al botón, sea la misma que ha puesto el comando, y que el autor del mensaje de las páginas, sea el mekox
-            const collector = embedpaginas.createMessageComponentCollector({ filter: i => i?.isButton() && i?.user && i?.user.id == message.author.id && i?.message.author.id == mekox.user.id, time: 180e3 });
+            const collector = embedpaginas.createMessageComponentCollector({ filter: i => i?.isButton() && i?.user && i?.user.id == message.author.id && i?.message.author.id == mekox.user.id, time: 3000 });
             //Escuchamos los eventos del collector
             collector.on("collect", async b => {
                 //Si el usuario que hace clic a el botón no es el mismo que ha escrito el comando, le respondemos que solo la persona que ha escrito >>queue puede cambiar de páginas
@@ -147,11 +147,13 @@ module.exports = {
                         break;
                 }
             });
-            /*collector.on("end", () => {
+            collector.on("end", () => {
                 //desactivamos los botones y editamos el mensaje
                 embedpaginas.components[0].components.map(boton => boton.disabled = true)
-                embedpaginas.edit({content: `El tiempo ha expirado! escribe de nuevo \`${prefix}queue para volver a ver la cola de canciones!\``, embeds: [embeds[paginaActual].setFooter({ text: `Pagina ${paginaActual + 1} / ${embeds.length}` })], components: [embedpaginas.components[0]] }).catch(() => { });
-            });*/
+                embedpaginas.edit({content: `El tiempo ha expirado! escribe de nuevo \`${prefix}q o ${prefix}queue\` para volver a ver la cola de canciones!`, embeds: [embeds[paginaActual]], components: [] }).catch(() => { });
+                
+                // embedpaginas.edit({content: `El tiempo ha expirado! escribe de nuevo \`${prefix}queue para volver a ver la cola de canciones!\``, embeds: [embeds[paginaActual].setFooter({ text: `Pagina ${paginaActual + 1} / ${embeds.length}` })], components: [embedpaginas.components[0]] }).catch(() => { });
+            });
         }
     }
 }

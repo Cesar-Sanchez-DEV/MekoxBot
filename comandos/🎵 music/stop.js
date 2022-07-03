@@ -12,7 +12,7 @@ module.exports = {
             .setAuthor("Mekox | Error ", mekox.user.avatarURL())
             .setDescription(`No hay canciones reproduciendose ahora, agrega una canción con: \`\`\`js\nm-p <songName>\n\`\`\``)
             .setColor("#ccb494")
-            return message.channel.send({ embeds : [error] })
+            return message.channel.send({ embeds : [error] }).then(y => setTimeout(() => y.delete(), 10000))
         }
         
         if(!message.member.voice?.channel){
@@ -21,7 +21,7 @@ module.exports = {
             .setDescription(`Tienes que estar en un \`canal de voz\` para ejecutar este comando`)
             .setTimestamp()
             .setColor("#ccb494")
-        return message.reply({ embeds:[embed] });
+        return message.reply({ embeds:[embed] }).then(y => setTimeout(() => y.delete(), 10000));
         }
         
         else if(!message.guild.me.voice?.channel){
@@ -30,7 +30,7 @@ module.exports = {
             .setDescription(`No estoy en un \`canal de voz\` pampu, invócame con: \`\`\`js\nm-p <songName>\n\`\`\``)
             .setTimestamp()
             .setColor("#ccb494")
-        return message.reply({ embeds:[embed] });
+        return message.reply({ embeds:[embed] }).then(y => setTimeout(() => y.delete(), 10000));
         }
         
         else if(message.guild.me.voice?.channel && message.member.voice?.channel.id != message.guild.me.voice?.channel.id){ 
@@ -39,7 +39,7 @@ module.exports = {
             .setDescription(`Unete al mismo \`canal de voz que yo\` para ejecutar este comando`)
             .setTimestamp()
             .setColor("#ccb494")
-        return message.reply({ embeds:[embed] });
+        return message.reply({ embeds:[embed] }).then(y => setTimeout(() => y.delete(), 10000));
         }
         mekox.distube.stop(message);
         

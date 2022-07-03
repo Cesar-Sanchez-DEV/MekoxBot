@@ -1,11 +1,14 @@
 const Discord = require('discord.js');
-const distube = require('distube');
+const mekox = require('discord.js');
 
 module.exports = {
-    name: "prev",
-    alias: ["anterior","previous"],
+    name: "skip",
+    alias: ["s"],
+    desc: "Sirve para saltar una canción",
+    execute(mekox, message, args){
+        //comprobaciones previas
+        const queue = mekox.distube.getQueue(message);
 
-    execute (mekox, message, args,playsong){
         if(!message.member.voice?.channel){
             const embed = new Discord.MessageEmbed()
             .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
@@ -23,7 +26,7 @@ module.exports = {
             .setColor("#ccb494")
         return message.reply({ embeds:[embed] });
         }
-
+        
         else if(!message.guild.me.voice?.channel){
             const embed = new Discord.MessageEmbed()
             .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
@@ -32,25 +35,27 @@ module.exports = {
             .setColor("#ccb494")
         return message.reply({ embeds:[embed] });
         }
-        
-        const serverQueue = mekox.distube.getQueue(message);
 
-        if(!serverQueue) {
+        else if(!queue) {
             const error = new Discord.MessageEmbed()
             .setAuthor("Mekox | Error ", mekox.user.avatarURL())
             .setDescription(`No hay canciones reproduciendose ahora, agrega una canción con: \`\`\`js\nm-p <songName>\n\`\`\``)
             .setColor("#ccb494")
             return message.channel.send({ embeds : [error] })
         }
-        if(serverQueue.previousSongs?.length===0){
-            const error = new Discord.MessageEmbed()
-            .setAuthor("Mekox | Error ", mekox.user.avatarURL())
-            .setDescription(`Error al retroceder de canción, no exiten canciones previas.`)
-            .setColor("#ccb494")
-            return message.channel.send({ embeds : [error] });
-            }else{
-                message.reply(`\`Reproduciendo la cancion anteior⏪\``)
-            }
-        mekox.distube.previous(message);
+        if(queue.autoplay){
+            message.reply(`\`Saltando a la siguiente canción⏭\``)
+            return mekox.distube.skip(message);
+        }
+        else if(!queue.songs[1]){
+        const error = new Discord.MessageEmbed()
+        .setAuthor("Mekox | Error ", mekox.user.avatarURL())
+        .setDescription(`Error al skipear la cancion, no quedan más canciones, agrega una canción con: \`\`\`js\nm-p <songName>\n\`\`\``)
+        .setColor("#ccb494")
+        return message.channel.send({ embeds : [error] });
+        }else{
+            message.reply(`\`Saltando a la siguiente canción⏭\``)
+        }
+        mekox.distube.skip(message);
     }
 }

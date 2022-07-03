@@ -37,7 +37,6 @@ async execute (mekox, message, args){
     const embedErrorCod = new Discord.MessageEmbed()
     .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
     .setDescription(`Debes ingresar un código a evaluar.`)
-    .setThumbnail("https://cdn.discordapp.com/attachments/887737260554977311/979805792351961088/Gatito-mekox-llorar.png")
     .setColor("#ccb494")
     message.reply({ embeds:[embedErrorCod] })
     return;
@@ -61,8 +60,12 @@ async execute (mekox, message, args){
       return;
     }
 
-
-    if(["mekox.token", "process.exit","config.token","mekox.destroy()"].includes(cosa)) return message.channel.send(`Eso esta prohibido hp`) 
+    if(["mekox.token", "process.exit","config.token","mekox.destroy()","process.env"].includes(cosa)) return message.channel.send(`Eso esta prohibido hp`)
+    if(args.join(" ").includes("mekox.token")) return message.channel.send(`wtf?, eso no puedes usar`)
+    if(args.join(" ").includes("process.exit")) return message.channel.send(`wtf?, eso no puedes usar`)
+    if(args.join(" ").includes("config.token")) return message.channel.send(`wtf?, eso no puedes usar`)
+    if(args.join(" ").includes("mekox.destroy()")) return message.channel.send(`wtf?, eso no puedes usar`)
+    if(args.join(" ").includes("process.env")) return message.channel.send(`wtf?, eso no puedes usar`)
 
     const start = Date.now();
 

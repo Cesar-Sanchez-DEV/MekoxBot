@@ -2,8 +2,8 @@ const Discord = require('discord.js');
 const distube = require('distube');
 
 module.exports = {
-    name: "autoplay",
-    alias: ["Autoplay"],
+    name: "shuffle",
+    alias: ["aleatorio","fiesta"],
     desc: "Establece la reproduccion automatica de la musica",
 
     execute (mekox, message, args){
@@ -25,6 +25,15 @@ module.exports = {
         return message.channel.send({ embeds : [error] })
         }
 
+        else if(!message.guild.me.voice?.channel){
+            const embed = new Discord.MessageEmbed()
+            .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
+            .setDescription(`No estoy en un \`canal de voz\` pampu, invócame con: \`\`\`js\nm-p <songName>\n\`\`\``)
+            .setTimestamp()
+            .setColor("#ccb494")
+        return message.reply({ embeds:[embed] });
+        }
+
         if(!serverQueue) {
         const error = new Discord.MessageEmbed()
         .setAuthor("Mekox | Error ", mekox.user.avatarURL())
@@ -42,20 +51,19 @@ module.exports = {
         // .setColor("#ccb494")
         // message.channel.send({ embeds : [embed] })
         // }
-        if(serverQueue.autoplay){
-            const error = new Discord.MessageEmbed()
-            .setAuthor("Mekox | Music ", mekox.user.avatarURL())
-            .setDescription(`La reproducción ya no será automática.`)
-            .setColor("#ccb494")
-            message.channel.send({ embeds : [error] })
-            return mekox.distube.toggleAutoplay(message)
-        }else{
-            const embed = new Discord.MessageEmbed()
-            .setAuthor("Mekox | Música ", mekox.user.avatarURL())
-            .setDescription(`La música se reproducirá automáticamente`)
-            .setColor("#ccb494")
-            message.channel.send({ embeds : [embed] })
-        }
-        mekox.distube.toggleAutoplay(message)
+        // if(serverQueue.autoplay){
+        //     const error = new Discord.MessageEmbed()
+        //     .setAuthor("Mekox | Music ", mekox.user.avatarURL())
+        //     .setDescription(`La reproducción ya no será aleatoriamente.`)
+        //     .setColor("#ccb494")
+        //     message.channel.send({ embeds : [error] })
+        //     return;
+        // }else{}
+        const embed = new Discord.MessageEmbed()
+        .setAuthor("Mekox | Música ", mekox.user.avatarURL())
+        .setDescription(`La música ahora se reproduce aleatoriamente.`)
+        .setColor("#ccb494")
+        message.channel.send({ embeds : [embed] })
+        mekox.distube.shuffle(message)
     }
 }

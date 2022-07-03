@@ -32,19 +32,22 @@ module.exports = {
                     ]
                 })
             } else {
-                return message.reply(`❌ **No se ha encontrado el comando que has especificado!**\nUsa \`${prefix}help\` para ver los comandos y categorías!`)
+                const embed = new Discord.MessageEmbed()
+                .setDescription(`No se ha encontrado el comando que has especificado\nUsa \`${prefix}help\` para ver los comandos y categorías`)
+                .setColor('RED')
+                return message.reply({embeds:[embed]})
             }
         }else{
             var paginaActual = 0;
 
             //definimos el embed principal
             let ayuda_embed = new Discord.MessageEmbed()
-            .setTitle(`Ayuda de __${mekox.user.tag}__`)
+            .setAuthor(`Mekox | Help`, mekox.user.avatarURL())
             .setColor("#ccb494")
-            .setDescription(`Bot Multifuncional en Desarollo por \`Rasec_moreno#1316\``)
-            .addField(`❓ __¿Quién soy?__`, `👋 Hola **${message.author}**, mi nombre es **__${mekox.user.username}__**\n🤯 Soy un BOT MULTIFUNCIONAL Incluyendo:\n> **ADMINISTRACIÓN\n> MODERACIÓN\n> MÚSICA**\n*y mucho más!*`)
-            .addField(`📈 **__ESTADÍSTICAS__**`, `⚙ **${mekox.commands.size} Comandos**\n📁 en **${mekox.guilds.cache.size} Servidores**\n📶 **\`${mekox.ws.ping}ms\` Ping**\n👤 Desarollado por **Rasec_moreno#1316(https://discord.gg/MBPsvcphGf)**`)
+            .setDescription(`Bot Multifuncional en Desarollo por <@750847741483286549> \n\n Hola **${message.author}**\nMi nombre es _\`${mekox.user.username}\`_\n Soy un BOT MULTIFUNCIONAL Incluyendo:\n> 🛠 **ADMINISTRACIÓN\n> 🕹 ENTRETENIMIENTO\n> <:notasmusicales:926969738087776297> MÚSICA**\n*y mucho más!*`)
+            .addField(`<:binarycode:991373744872378479> **_ESTADÍSTICAS:_**`, `> <:html:992147549530103961> **\`${mekox.commands.size} Comandos\`**\n> <:categorias:931790857399578655> **\`${mekox.guilds.cache.size} Servidores\`**\n> <:ping:901864024529076234> **_\`${mekox.ws.ping}ms\`_**\n> <:usuario:901715496234258453> Desarollado por **[Rasec_moreno#1316](https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley)**`)
             .setThumbnail(message.guild.iconURL({ dynamic: true }))
+            .setImage("https://cdn.discordapp.com/attachments/985059285753012244/991576119633514506/mekoxFachaHorizontal.png")
             .setFooter({ text: `Página 1 / ${categorias.length+1}\n© desarollado por Rasec_moreno#1316 | 2022`, iconURL: `${mekox.user.avatarURL()}` })
             let embeds_pages = [ayuda_embed];
 
@@ -53,7 +56,7 @@ module.exports = {
                 const comandos_de_categoria = readdirSync(`./comandos/${categoria}`).filter(archivo => archivo.endsWith('.js'));
 
                 let embed = new Discord.MessageEmbed()
-                    .setTitle(`${categoria.split(" ")[1]} ${categoria.split(" ")[0]} ${categoria.split(" ")[1]}`)
+                    .setTitle(`${categoria.split(" ")[0]} ${categoria.split(" ")[1]} ${categoria.split(" ")[0]}`)
                     .setColor("#ccb494")
                     .setThumbnail(message.guild.iconURL({ dynamic: true }))
                     .setDescription(comandos_de_categoria.length >= 1 ? `>>> *${comandos_de_categoria.map(comando => `\`${comando.replace(/.js/, "")}\``).join(" - ")}*` : `>>> *Todavía no hay comandos en esta categoría...*`)
@@ -64,15 +67,16 @@ module.exports = {
             //definimos la selección de categoría
             const seleccion = new Discord.MessageActionRow().addComponents(new Discord.MessageSelectMenu()
                 .setCustomId(`SelecciónMenuAyuda`)
-                .setMaxValues(5)
+                .setPlaceholder(`────────>Menu de comandos<────────`)
+                .setMaxValues(4)
                 .setMinValues(1)
                 .addOptions(categorias.map(categoria => {
                     //definimos el objeto, que será una opción a elegir
                     let objeto = {
-                        label: categoria.split(" ")[0].substring(0, 50),
+                        label: categoria.split(" ")[1].substring(0, 50),
                         value: categoria,
-                        description: `Mira los comandos de ${categoria.split(" ")[0]}`,
-                        emoji: categoria.split(" ")[1],
+                        description: `Mira los comandos de ${categoria.split(" ")[1]}`,
+                        emoji: categoria.split(" ")[0],
                     }
                     //devolvemos el objeto creado y lo añadimos como una opción más
                     return objeto;
@@ -80,18 +84,19 @@ module.exports = {
             )
 
             const botones = new Discord.MessageActionRow().addComponents([
-                new Discord.MessageButton().setStyle('SUCCESS').setLabel("Atrás").setCustomId("Atrás").setEmoji("929001012176507040"),
-                new Discord.MessageButton().setStyle('PRIMARY').setLabel("Inicio").setCustomId("Inicio").setEmoji("🏠"),
-                new Discord.MessageButton().setStyle('SUCCESS').setLabel("Avanzar").setCustomId("Avanzar").setEmoji("929001012461707335"),
+                new Discord.MessageButton().setStyle('SECONDARY').setCustomId("Atrás").setEmoji("<:atraswhite:992147550998102100>"),
+                new Discord.MessageButton().setStyle('PRIMARY').setCustomId("Inicio").setEmoji("<:casasiluetanegrasinpuerta:991453697471164556>"),
+                new Discord.MessageButton().setStyle('SECONDARY').setCustomId("Avanzar").setEmoji("<:adelantewhite:992147552713580654>"),
+                new Discord.MessageButton().setStyle('LINK').setURL("https://discord.com/api/oauth2/authorize?client_id=957720942639972383&permissions=8&scope=bot").setLabel(`INVITE`)
             ])
 
             let mensaje_ayuda = await message.reply({ embeds: [ayuda_embed], components: [seleccion,botones] });
 
-            const collector = mensaje_ayuda.createMessageComponentCollector({ filter: i => i.isButton() || i.isSelectMenu() && i.user && i.message.author.id == mekox.user.id, time: 180e3 });
+            const collector = mensaje_ayuda.createMessageComponentCollector({ filter: i => i.isButton() || i.isSelectMenu() && i.user && i.message.author.id == mekox.user.id, time: 50000 });
 
             collector.on("collect", async (interaccion) => {
                 if (interaccion.isButton()) {
-                    if(interaccion.user.id !== message.author.id) return interaccion.reply({content: `❌ **No puedes hacer eso! Solo ${message.author}**`, ephemeral: true})
+                    if(interaccion.user.id !== message.author.id) return interaccion.reply({content: `Interacción fallida solo ${message.author} puede ejecutar esta operación`, ephemeral: true})
                     switch (interaccion.customId) {
                         case "Atrás": {
                             //Resetemamos el tiempo del collector
@@ -154,7 +159,7 @@ module.exports = {
                         const comandos_de_categoria = readdirSync(`./comandos/${seleccionado}`).filter(archivo => archivo.endsWith('.js'));
 
                         let embed = new Discord.MessageEmbed()
-                        .setTitle(`${seleccionado.split(" ")[1]} ${seleccionado.split(" ")[0]} ${seleccionado.split(" ")[1]}`)
+                        .setTitle(`${seleccionado.split(" ")[0]} ${seleccionado.split(" ")[1]} ${seleccionado.split(" ")[0]}`)
                         .setColor("#ccb494")
                         .setThumbnail(message.guild.iconURL({ dynamic: true }))
                         .setDescription(comandos_de_categoria.length >= 1 ? `>>> *${comandos_de_categoria.map(comando => `\`${comando.replace(/.js/, "")}\``).join(" - ")}*` : `>>> *Todavía no hay comandos en esta categoría...*`)
@@ -168,7 +173,10 @@ module.exports = {
             });
 
             collector.on("end", () => {
-                mensaje_ayuda.edit({ content: `Tu tiempo ha expirado! Vuelve a escribir \`${prefix}help\` para verlo de nuevo!`, components: [] }).catch(() => { });
+                const embed_end = new Discord.MessageEmbed()
+                .setDescription(`Tu tiempo ha expirado vuelve a escribir \`${prefix}h o ${prefix}help\` para verlo de nuevo`)
+                .setColor('RED')
+                mensaje_ayuda.edit({embeds: [embed_end], components: [] }).catch(() => { });
             })
         }
     }

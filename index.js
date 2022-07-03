@@ -6,9 +6,9 @@ require('colors')
 
 let nick = "mekoxBOT"
 
-console.log(`╔═════════════════════════════════════════════════════╗`.red)
-console.log(`║ `.red + `            Conectando como ${nick}`.red + " ".repeat(`Conectando como `.length) + "║".red)
-console.log(`╚═════════════════════════════════════════════════════╝`.red)
+console.log(`╔═════════════════════════════════════════════════════╗`.brightRed)
+console.log(`║ `.brightRed + `            Conectando como ${nick}`.brightRed + " ".repeat(`Conectando como `.length) + "║".brightRed)
+console.log(`╚═════════════════════════════════════════════════════╝`.brightRed)
 
 process.on("unhandledRejection", async (rej) => {
   console.error(rej)
@@ -29,13 +29,13 @@ function requerirhandlers() {
       } catch (e) {
           console.warn(e)
       }
-  })
+  })  
 }
 
 requerirhandlers();
 
 mekox.on("ready", () => {
-    console.log("Hola idiota ya estoy funcionando xd");
+    console.log("Hola idiota ya estoy funcionando xd".brightRed);
     const time = (1000*5)
 
     let status = [
@@ -48,7 +48,7 @@ mekox.on("ready", () => {
         type: 'WATCHING'
       }],
       [{
-        name: `Musica p`,
+        name: `m-help`,
         type:'LISTENING'
       }]
     ]
@@ -98,14 +98,12 @@ mekox.on("messageCreate", (message)=> {
   if(!cmd){
     if(message.content === prefix) return;
     const embed = new Discord.MessageEmbed()
-    .setAuthor(`Mekox | Error`, mekox.user.avatarURL())
-    .setTitle('❌`|`Comando no encontrado')
     .setDescription(`El comando \`${command}\` no está definido, consulta con <@750847741483286549> si quieres agregar un comando :)`+"<:emoji_45:856232972914131005>")
-    .setThumbnail("https://cdn.discordapp.com/attachments/887737260554977311/979805792351961088/Gatito-mekox-llorar.png")
-    .setTimestamp()
-    .setColor("#ccb494")
+    .setColor('RED')
     message.reply({ embeds:[embed] })
   }
 });
-
-mekox.login("OTU3NzIwOTQyNjM5OTcyMzgz.YkC5Ig.yv4bpJpVmSd9qGOPwjtsasNo_Lg");
+mekox.on("error",(message,error)=>{
+  message.channel.send("Holla, hubo un error con el bot, el error es: "+error)
+})
+mekox.login("OTU3NzIwOTQyNjM5OTcyMzgz.GH-kWU.8yCVNsJI_RccMkqM1SUHWYQIjI5Bpt1U3uL8HM");
